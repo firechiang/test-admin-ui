@@ -63,8 +63,10 @@ export default function Dashboard() {
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min p-4">
-                        {/* 子路由的内容渲染在这里 */}
-                        <Outlet/>
+                        <div className="hidden h-full flex-1 flex-col gap-8 pt-4 md:flex">
+                            {/* 子路由的内容渲染在这里 */}
+                            <Outlet/>
+                        </div>
                     </div>
                 </div>
             </SidebarInset>
