@@ -38,13 +38,13 @@ const navItems: NavSidebarItem[] = [
         icon: Frame,
     },
     {
-        title: "Sales Marketing",
-        url: "/dashboard",
+        title: "富文本编辑",
+        url: "/dashboard/editor",
         icon: PieChart,
     },
     {
-        title: "Travel",
-        url: "#",
+        title: "产品创建",
+        url: "/dashboard/product-create",
         icon: Map,
     },
     {
