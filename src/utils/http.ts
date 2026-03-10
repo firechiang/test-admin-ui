@@ -1,7 +1,7 @@
-import {useState, useCallback} from 'react';
-import axios, {type InternalAxiosRequestConfig, type AxiosResponse} from 'axios';
-import {authService} from "@/services/auth-service";
-import {toast} from "sonner";
+import { useState, useCallback } from 'react';
+import axios, { type InternalAxiosRequestConfig, type AxiosResponse } from 'axios';
+import { authService } from "@/services/auth-service";
+import { toast } from "sonner";
 
 const GET_METHOD = "GET";
 const POST_METHOD = "POST";
@@ -22,7 +22,7 @@ api.interceptors.request.use(
         const token = authService.getToken();
         // 如果Token存在，则添加到请求头
         if (token && config.headers) {
-            config.headers.setAuthorization(`Bearer ${token}`);
+            config.headers.setAuthorization(token);
         }
         return config;
     },
@@ -95,5 +95,5 @@ export function useHttp<T>(method: string) {
         }
     }, [method]);
 
-    return {data, loading, run, setData};
+    return { data, loading, run, setData };
 }

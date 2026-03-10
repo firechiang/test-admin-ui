@@ -1,5 +1,5 @@
 import * as React from "react";
-import {ChevronRight, Frame, type LucideIcon, Map, PieChart, SquareTerminal,} from "lucide-react";
+import { ChevronRight, Frame, type LucideIcon, Map, PieChart, SquareTerminal, } from "lucide-react";
 
 import {
     Sidebar,
@@ -14,8 +14,8 @@ import {
     SidebarMenuSubItem,
     SidebarRail,
 } from "@/components/ui/sidebar";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible.tsx";
-import {Link} from "react-router";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible.tsx";
+import { Link } from "react-router";
 import ProjectIcon from "@/assets/project-icon.svg";
 
 export interface NavSidebarItem {
@@ -48,6 +48,11 @@ const navItems: NavSidebarItem[] = [
         icon: Map,
     },
     {
+        title: "新增机构",
+        url: "/dashboard/agency-create",
+        icon: Map,
+    },
+    {
         title: "Playground",
         url: "#",
         icon: SquareTerminal,
@@ -69,7 +74,7 @@ const navItems: NavSidebarItem[] = [
     }
 ]
 
-export function NavSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+export function NavSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
@@ -78,7 +83,7 @@ export function NavSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                         <SidebarMenuButton size="lg" asChild>
                             <Link to={"/dashboard"}>
                                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                                    <img src={ProjectIcon}/>
+                                    <img src={ProjectIcon} />
                                 </div>
                                 <div className="flex flex-col gap-0.5 leading-none">
                                     <span className="font-semibold">TestDev</span>
@@ -104,10 +109,10 @@ export function NavSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                                         <SidebarMenuItem>
                                             <CollapsibleTrigger asChild>
                                                 <SidebarMenuButton tooltip={item.title}>
-                                                    {item.icon && <item.icon/>}
+                                                    {item.icon && <item.icon />}
                                                     <span>{item.title}</span>
                                                     <ChevronRight
-                                                        className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"/>
+                                                        className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                                 </SidebarMenuButton>
                                             </CollapsibleTrigger>
                                             <CollapsibleContent>
@@ -131,7 +136,7 @@ export function NavSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
                                             <Link to={item.url}>
-                                                <item.icon/>
+                                                <item.icon />
                                                 <span>{item.title}</span>
                                             </Link>
                                         </SidebarMenuButton>
@@ -142,7 +147,7 @@ export function NavSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     </SidebarMenu>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarRail/>
+            <SidebarRail />
         </Sidebar>
     )
 }

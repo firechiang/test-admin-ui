@@ -1,4 +1,4 @@
-import {api} from "@/utils/http";
+import { api } from "@/utils/http";
 
 // 管理员信息
 export interface Admin {
@@ -12,11 +12,10 @@ const ADMIN_KEY = "admin_user";
 export const authService = {
     async login(uname: string, pwd: string): Promise<string> {
         try {
-            const response = await api.post<string>('/auth/login', {
+            const token = await api.post<string, string>('/auth/login', {
                 uname,
                 pwd
             });
-            const token = response.data;
             this.setToken(token);
             return token;
         } catch (error) {
@@ -48,7 +47,7 @@ export const authService = {
             return JSON.parse(adminJson);
         }
         try {
-            const admin = await api.get<any,Admin>("/auth/admin");
+            const admin = await api.get<any, Admin>("/auth/admin");
             this.setAdmin(admin);
             return admin;
         } catch (error) {
