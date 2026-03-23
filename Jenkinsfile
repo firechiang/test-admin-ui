@@ -25,7 +25,7 @@ pipeline {
         // serve 监听地址
         SERVE_ADDR        = credentials('SERVE_ADDR')
         // 前端 API 请求地址（Vite 构建时注入）
-        VITE_API_BASE_URL = "http://${SERVE_ADDR}:8093"
+        VITE_API_BASE_URL = "http://${SERVE_ADDR}:8093/admin-api"
     }
 
     options {
