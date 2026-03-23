@@ -97,24 +97,26 @@ pipeline {
                 expression { params.ACTION in ['deploy', 'restart'] }
             }
             steps {
-                sh """
-                    # 安装 serve 和 pm2（如果还没有安装）
-                    npm list -g serve  || npm install -g serve
-                    npm list -g pm2    || npm install -g pm2
+                withEnv(['JENKINS_NODE_COOKIE=dontKillMe']) {
+                    sh """
+                        # 安装 serve 和 pm2（如果还没有安装）
+                        npm list -g serve  || npm install -g serve
+                        npm list -g pm2    || npm install -g pm2
 
-                    # 创建目录并解压产物
-                    mkdir -p ${DEPLOY_PATH}
-                    rm -rf ${DEPLOY_PATH}/*
-                    tar -xzf ${APP_NAME}-${BUILD_NUMBER}.tar.gz -C ${DEPLOY_PATH}
+                        # 创建目录并解压产物
+                        mkdir -p ${DEPLOY_PATH}
+                        rm -rf ${DEPLOY_PATH}/*
+                        tar -xzf ${APP_NAME}-${BUILD_NUMBER}.tar.gz -C ${DEPLOY_PATH}
 
-                    # 停止旧进程（忽略不存在的情况）
-                    pm2 stop ${APP_NAME} || true
-                    pm2 delete ${APP_NAME} || true
+                        # 停止旧进程（忽略不存在的情况）
+                        pm2 stop ${APP_NAME} || true
+                        pm2 delete ${APP_NAME} || true
 
-                    # 用 pm2 托管 serve 进程
-                    pm2 start serve --name ${APP_NAME} -- -s ${DEPLOY_PATH} -l ${SERVE_PORT}
-                    pm2 save
-                """
+                        # 用 pm2 托管 serve 进程
+                        pm2 start serve --name ${APP_NAME} -- -s ${DEPLOY_PATH} -l ${SERVE_PORT}
+                        pm2 save
+                    """
+                }
             }
         }
     }
